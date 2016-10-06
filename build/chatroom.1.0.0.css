@@ -1,0 +1,11 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+}
+#inline {
+  display: inline-block;
+}
+/*# sourceMappingURL=chatroom.1.0.0.css.map */

@@ -57,30 +57,69 @@
 	  // allowing sending and receiving of messages.
 	  var socket = io();
 	  var input = (0, _jquery2.default)('input');
+	  var join = (0, _jquery2.default)('#join');
+	  var send = (0, _jquery2.default)('#send');
+	  var name = (0, _jquery2.default)('#name');
+	  var msg = (0, _jquery2.default)('#msg');
 	  var message = (0, _jquery2.default)('#messages');
+	  var connected = (0, _jquery2.default)('#connected');
+	  var num_users = 0;
 	
-	  var addMessage = function addMessage(msg) {
-	    message.append('<div>' + msg + '</div>');
+	  // Add Message to DOM.
+	  var addMessage = function addMessage(user, msg) {
+	    message.append('<div>' + user + ': ' + msg + '</div>');
 	  };
 	
-	  input.on('keydown', function (event) {
-	    if (event.keyCode != 13) {
+	  // Add a new User.
+	  var addUser = function addUser(user) {
+	    message.append('<div>' + user + ' has joined the chatroom.' + '</div>');
+	    num_users++;
+	    socket.on('user connected', function () {
+	      connected.append(num_users + ' users are currently in the chatroom.');
+	    });
+	  };
 	
-	      return;
-	    }
+	  // Removing a User.
+	  var removeUser = function removeUser(user) {
+	    message.append('<div>' + user + ' has left the chatroom.' + '</div>');
+	    num_users--;
+	    socket.on('user disconnected', function () {
+	      connected.append(num_users + ' users are currently in the chatroom.');
+	    });
+	  };
 	
-	    var message = input.val();
-	    addMessage(message);
-	    socket.emit('message', message); // send message to Server...text from input box.
-	    input.val('');
+	  // User Join Event
+	  join.on('click', function (event) {
+	    var user = name.val();
+	    addUser(user);
+	    name.val('');
+	    socket.emit('join', user); // maybe broadcast.emit()???
+	
+	
+	    // Message Sending Event
+	    msg.on('keydown', function (event) {
+	      if (event.keyCode != 13) {
+	        return;
+	      }
+	      var message = msg.val();
+	      if (message !== '') {
+	        addMessage(user, message);
+	        socket.emit('message', user, message); // send message to Server...text from input box.
+	        msg.val('');
+	      }
+	    });
+	
+	    send.on('click', function (event) {
+	      var message = msg.val();
+	      addMessage(user, message);
+	      socket.emit('message', user, message); // send message to Server...text from input box.
+	      msg.val('');
+	    });
 	  });
+	
+	  socket.on('join', addUser);
 	  socket.on('message', addMessage);
-	  socket.on('user connected', function () {
-	    message.append('User is connected.');
-	  });
-	  socket.on('user disconnected', function () {
-	    message.append('User is disconnected.');
-	  });
+	  socket.on('remove-user', removeUser);
 	});
 
 /***/ },

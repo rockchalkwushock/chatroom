@@ -3,15 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title>Chatroom</title>
+    <link rel="stylesheet" href="/build/chatroom.1.0.0.min.css">
   </head>
   <body>
     <!-- JS -->
-    <script src="chatroom.1.0.0.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="chatroom.1.0.0.js"></script>
 
-    <input type="text">
+    <div id="inline"><input type="text" id="name" placeholder="Enter username"></div>
+    <button id="join">Join</button>
+    <br>
+    <input type="text" id="msg" placeholder="Enter message">
+    <button id="send">Send</button>
+    <div id="connected"></div>
     <div id="messages"></div>
-    <div id="connection"></div>
-    <div id="count"></div>
+
   </body>
 </html>
