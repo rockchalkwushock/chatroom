@@ -10,6 +10,10 @@ app.use(express.static('public'));
 //
 // io.on('connection', (socket) => {
 //     console.log('Client connected');
+//     socket.on('message', (message) => {      // listens for a message from Client and then prints that message.
+//        console.log('Received message:', message);
+//        socket.broadcast.emit('message', message); // sends message to all clients on server (except socket object which is being used by the Server: aka. the client who sent the message.)
+//    });
 // });
 
 

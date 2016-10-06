@@ -19,7 +19,11 @@ $(document).ready(() => {
 
     let message = input.val();
     addMessage(message);
-    // socket.emit('message', message);
+    // socket.emit('message', message); // send message to Server...text from input box.
     input.val('');
   });
 });
+
+
+// Where to put this:
+// socket.on('message', addMessage);
