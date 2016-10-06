@@ -40,39 +40,53 @@
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _jquery = __webpack_require__(1);
+	var _jquery = __webpack_require__(165);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	(0, _jquery2.default)(document).ready(function () {
+	  // Manager object, will automatically attempt to connect to the server
+	  // allowing sending and receiving of messages.
+	  var socket = io();
 	  var input = (0, _jquery2.default)('input');
-	  var message = (0, _jquery2.default)('#message');
+	  var message = (0, _jquery2.default)('#messages');
 	
-	  var addMessage = function addMessage(message) {
-	    messages.append('<div>' + message + '</div>');
+	  var addMessage = function addMessage(msg) {
+	    message.append('<div>' + msg + '</div>');
 	  };
 	
 	  input.on('keydown', function (event) {
 	    if (event.keyCode != 13) {
+	
 	      return;
 	    }
 	
 	    var message = input.val();
 	    addMessage(message);
+	    socket.emit('message', message); // send message to Server...text from input box.
 	    input.val('');
+	  });
+	  socket.on('message', addMessage);
+	  socket.on('user connected', function () {
+	    message.append('User is connected.');
+	  });
+	  socket.on('user disconnected', function () {
+	    message.append('User is disconnected.');
 	  });
 	});
 
 /***/ },
-/* 1 */
+
+/***/ 165:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10298,5 +10312,6 @@
 
 
 /***/ }
-/******/ ]);
+
+/******/ });
 //# sourceMappingURL=chatroom.1.0.0.js.map
