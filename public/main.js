@@ -2,6 +2,9 @@ import $ from 'jquery';
 
 
 $(document).ready(() => {
+  // Manager object, will automatically attempt to connect to the server
+  // allowing sending and receiving of messages.
+  // let socket = io();
   let input = $('input');
   let message = $('#message');
 
@@ -16,6 +19,7 @@ $(document).ready(() => {
 
     let message = input.val();
     addMessage(message);
+    // socket.emit('message', message);
     input.val('');
   });
 });
