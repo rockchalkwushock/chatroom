@@ -1,10 +1,24 @@
 # Chatroom Web App
 Simple chatroom app using Sockets.IO
 
-## Technologies Utilized:
+## Languages
+#### Front-End
+  - Javascript (ES6)
+#### Back-End
   - Node.js
-  - Express.js
-  - Socket.io
-  - ES6
+  
+## Libraries
   - jQuery
-  - webpack
+  - Socket.io
+
+## Frameworks
+  - Express.js
+
+## Pre-Processors
+  - Less
+
+## Tools
+  - Uglify.js
+  - Clean CSS
+  - Webpack
+  - Babel

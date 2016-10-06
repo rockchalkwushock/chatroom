@@ -14,10 +14,8 @@ $(document).ready(() => {
 
   input.on('keydown', (event) => {
     if (event.keyCode != 13) {
-
         return;
     }
-
     let message = input.val();
     addMessage(message);
     socket.emit('message', message); // send message to Server...text from input box.
