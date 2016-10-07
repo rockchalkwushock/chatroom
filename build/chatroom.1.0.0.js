@@ -56,7 +56,6 @@
 	  // Manager object, will automatically attempt to connect to the server
 	  // allowing sending and receiving of messages.
 	  var socket = io();
-	  var input = (0, _jquery2.default)('input');
 	  var join = (0, _jquery2.default)('#join');
 	  var send = (0, _jquery2.default)('#send');
 	  var name = (0, _jquery2.default)('#name');
@@ -74,19 +73,19 @@
 	  var addUser = function addUser(user) {
 	    message.append('<div>' + user + ' has joined the chatroom.' + '</div>');
 	    num_users++;
-	    socket.on('user connected', function () {
-	      connected.append(num_users + ' users are currently in the chatroom.');
-	    });
 	  };
+	  socket.on('user connected', function () {
+	    connected.html(num_users + ' users are currently in the chatroom.');
+	  });
 	
 	  // Removing a User.
 	  var removeUser = function removeUser(user) {
 	    message.append('<div>' + user + ' has left the chatroom.' + '</div>');
 	    num_users--;
-	    socket.on('user disconnected', function () {
-	      connected.append(num_users + ' users are currently in the chatroom.');
-	    });
 	  };
+	  socket.on('user disconnected', function () {
+	    connected.html(num_users + ' users are currently in the chatroom.');
+	  });
 	
 	  // User Join Event
 	  join.on('click', function (event) {
