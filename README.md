@@ -2,10 +2,8 @@
 Simple chatroom app using Sockets.IO
 
 ## Languages
-#### Front-End
-  - Javascript (ES6)
-#### Back-End
-  - Node.js
+  - Front-end: Javascript (ES6)
+  - Back-end: Node.js
   
 ## Libraries
   - jQuery
